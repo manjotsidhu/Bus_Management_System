@@ -108,11 +108,7 @@
 
         <!--Grid column-->
         <div class="col-md-6">
-
-            <h2>Welcome to Bus Management System!</h2>
-            <p class="lead">Ticket Reservation, Bus availabilities, Registration, Log in, Admin. <br>For personal and commercial use.</p>
-            
-
+            <h2>Bus Reservation</h2>
         </div>
         <!--Grid column-->
 
@@ -126,78 +122,70 @@
 
   <!--Main layout-->
   <main>
-    <div class="container my-5">
+    <div class="fluid-container">
 
 
-        <!-- Section: Block Content -->
-        <section class="dark-grey-text text-center">
-      
-          <!-- Grid row -->
-          <div class="row">
-      
-            <!-- Grid column -->
-            <div class="col-lg-4 col-md-12 mb-4">
-      
-              <div class="overlay rounded z-depth-1">
-                <img src="https://mdbootstrap.com/img/Photos/Others/images/58.jpg" class="img-fluid" alt="Sample project image">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
+        <!--Section: Content-->
+  <section class="p-5 text-center" 
+  style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background.jpg); background-size: cover; background-position: 0;">
+
+  <form class="container" action="">
+
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <!-- Material form login -->
+        <div class="card">
+
+          <!--Card content-->
+          <div class="card-body">
+
+            <!-- Form -->
+            <form class="text-center" style="color: #757575;" action="#!">
+
+              <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Book Your Tickets Now</h3>
+
+              <input type="name" name="name" class="form-control mb-4" placeholder="Name">
+              <!-- Name -->
+              <input name="email" class="form-control mb-4" placeholder="Email">
+
+              <select name="ticketType" class="browser-default custom-select mb-4">
+                <option value="" disabled selected>Choose your ticket type</option>
+                <option value="1">Sleeper</option>
+                <option value="2">Semi-Sleeper</option>
+                <option value="3">Seater</option>
+              </select>
+              <select name="source" class="browser-default custom-select mb-4">
+                <option value="" disabled selected>Source Location</option>
+                <option value="1">Bengaluru</option>
+                <option value="2">Hyderabad</option>
+                <option value="3">Nagpur</option>
+                <option value="4">Mumbai</option>
+              </select>
+              <select name="destination" class="browser-default custom-select mb-4">
+                <option value="" disabled selected>Destination Location</option>
+                <option value="1">Bengaluru</option>
+                <option value="2">Hyderabad</option>
+                <option value="3">Nagpur</option>
+                <option value="4">Mumbai</option>
+              </select>              
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-orange btn-rounded my-4 waves-effect">Book</button>
               </div>
-      
-              <div class="px-3 pt-3 mx-1 mt-1 pb-0">
-                <h4 class="font-weight-bold mt-1 mb-3">Ticket Bookings</h4>
-                <p class="text-muted">Book your bus tickets from anywhere anytime.</p>
-                <a class="btn btn-indigo btn-sm btn-rounded" href="newbooking.html"><i class="fas fa-clone left"></i>  Book Now</a>
-              </div>
-      
-            </div>
-            <!-- Grid column -->
-      
-            <!-- Grid column -->
-            <div class="col-lg-4 col-md-6 mb-4">
-      
-              <div class="overlay rounded z-depth-1">
-                <img src="https://mdbootstrap.com/img/Photos/Others/project4.jpg" class="img-fluid" alt="Sample project image">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-      
-              <div class="px-3 pt-3 mx-1 mt-1 pb-0">
-                <h4 class="font-weight-bold mt-1 mb-3">Your Bookings</h4>
-                <p class="text-muted">Last Booking done on 24th February 2020.</p>
-                <a class="btn btn-indigo btn-sm btn-rounded" href="bookings.html"><i class="fas fa-clone left"></i> View Booking Details</a>
-              </div>
-      
-            </div>
-            <!-- Grid column -->
-      
-            <!-- Grid column -->
-            <div class="col-lg-4 col-md-6 mb-4">
-      
-              <div class="overlay rounded z-depth-1">
-                <img src="https://mdbootstrap.com/img/Photos/Others/images/88.jpg" class="img-fluid" alt="Sample project image">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-      
-              <div class="px-3 pt-3 mx-1 mt-1 pb-0">
-                <h4 class="font-weight-bold mt-1 mb-3">Bus Details</h4>
-                <p class="text-muted">Check bus and driver details.</p>
-                <a class="btn btn-indigo btn-sm btn-rounded" href="busdetails.html"><i class="fas fa-clone left"></i> View Driver Details</a>
-              </div>
-      
-            </div>
-            <!-- Grid column -->
-      
+
+            </form>
+            <!-- Form -->
+
           </div>
-          <!-- Grid row -->
-      
-        </section>
-        <!-- Section: Block Content -->
-      
+
+        </div>
+        <!-- Material form login -->
+      </div>
+    </div>
+
+  </form>
+
+</section>
+<!--Section: Content-->
       
       </div>
   </main>
