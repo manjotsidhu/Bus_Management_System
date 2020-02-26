@@ -99,7 +99,7 @@ if(isset($_POST['login'])) {
 
       <!-- Brand -->
       <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong>BMS - Bus Management System</strong>
+        <strong>Bus Management System</strong>
       </a>
 
       <!-- Collapse -->
