@@ -5,11 +5,21 @@ CREATE TABLE users
     , first_name VARCHAR2(20)
     , last_name  VARCHAR2(25) NOT NULL
     , email      VARCHAR2(25) NOT NULL
-    , mobile_number   VARCHAR2(10)
-    , username     VARCHAR2(20)    
+    , mobile_number   VARCHAR2(10)  
     , password     VARCHAR2(20)
     , date_of_birth DATE
     ) ;
+
+CREATE SEQUENCE uid_sequence;
+
+CREATE OR REPLACE TRIGGER auto_increment_uid
+  BEFORE INSERT ON users
+  FOR EACH ROW
+BEGIN
+  SELECT uid_sequence.nextval
+  INTO :new.user_id
+  FROM dual;
+END;
 
 Prompt ******  Creating DRIVERS table ....
 
