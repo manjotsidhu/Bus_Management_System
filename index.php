@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+// Session
+session_start();
+require 'db.php'; 
+$_SESSION["conn"] = $conn; 
 
+$loginError = false;
+$signUpError = false;
+$signUpErrorMessage = [];
+
+if(isset($_POST['login'])) {
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
+
+    $stid = oci_parse($conn, sprintf("SELECT * FROM USERS WHERE EMAIL='%s' AND PASSWORD='%s'", $user, $pass));
+    oci_execute($stid);
+    oci_fetch_all($stid, $row);
+
+    if (oci_num_rows($stid) == 1) {
+      $_SESSION['user'] = $row;
+
+      header("Location: dashboard.php");
+      exit();
+    } else {
+      $loginError = true;
+    }
+
+    oci_free_statement($stid);
+
+} else if (isset($_POST['signup'])) {
+    
+  $stid = oci_parse($conn, sprintf("INSERT INTO users VALUES (%d, '%s', '%s', '%s', '%s', '%s', '%s')", 0, $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phno'], $_POST['pass'], $_POST['dob']));
+  if (!oci_execute($stid)) {
+    $signUpError = true;
+    $signUpErrorMessage = oci_error($stid);
+  }
+  
+  oci_free_statement($stid);
+}
+
+
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,7 +99,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong>BMS</strong>
+        <strong>BMS - Bus Management System</strong>
       </a>
 
       <!-- Collapse -->
@@ -94,12 +135,21 @@
   <!-- Full Page Intro -->
   <div class="view full-page-intro"
     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;">
-
+    
     <!-- Mask & flexbox options-->
     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
       <!-- Content -->
       <div class="container">
+      <?php if($loginError) { ?>
+        <div class="alert alert-danger text-center" role="alert">
+          Invalid Credientials, Please try again
+        </div>
+      <?php } else if($signUpError) {?>
+        <div class="alert alert-danger text-center" role="alert">
+          <?php echo $signUpErrorMessage['message']; ?>
+        </div>
+      <?php } ?>
 
         <!--Grid row-->
         <div class="row wow fadeIn">
@@ -135,7 +185,6 @@
             <!--Form-->
             <div id="loginbox" class="">
 
-
               <div class="card">
 
                 <h5 class="card-header info-color white-text text-center py-4">
@@ -146,17 +195,17 @@
                 <div class="card-body px-lg-5 pt-0">
 
                   <!-- Form -->
-                  <form class="text-center" style="color: #757575;" action="#!">
+                  <form class="text-center" style="color: #757575;" method="post" name="login">
 
                     <!-- Email -->
                     <div class="md-form">
-                      <input type="email" id="materialLoginFormEmail" class="form-control">
+                      <input name="user" type="email" id="materialLoginFormEmail" class="form-control" required>
                       <label for="materialLoginFormEmail">E-mail</label>
                     </div>
 
                     <!-- Password -->
                     <div class="md-form">
-                      <input type="password" id="materialLoginFormPassword" class="form-control">
+                      <input name="pass" type="password" id="materialLoginFormPassword" class="form-control" required>
                       <label for="materialLoginFormPassword">Password</label>
                     </div>
 
@@ -176,7 +225,7 @@
 
                     <!-- Sign in button -->
                     <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
-                      type="submit">Sign in</button>
+                      type="submit" name="login">Sign in</button>
 
                     <!-- Register -->
                     <p>Not a member?
@@ -202,20 +251,20 @@
                 <div class="card-body px-lg-5 pt-0">
 
                   <!-- Form -->
-                  <form class="text-center" style="color: #757575;" action="#!">
+                  <form class="text-center" style="color: #757575;" method="post" name="signup">
 
                     <div class="form-row">
                       <div class="col">
                         <!-- First name -->
                         <div class="md-form">
-                          <input type="text" id="materialRegisterFormFirstName" class="form-control">
+                          <input type="text" name="fname" id="materialRegisterFormFirstName" class="form-control" required>
                           <label for="materialRegisterFormFirstName">First name</label>
                         </div>
                       </div>
                       <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                          <input type="email" id="materialRegisterFormLastName" class="form-control">
+                          <input type="text" name="lname" id="materialRegisterFormLastName" class="form-control" required>
                           <label for="materialRegisterFormLastName">Last name</label>
                         </div>
                       </div>
@@ -223,39 +272,31 @@
 
                     <!-- E-mail -->
                     <div class="md-form mt-0">
-                      <input type="email" id="materialRegisterFormEmail" class="form-control">
+                      <input type="email" name="email" id="materialRegisterFormEmail" class="form-control" required>
                       <label for="materialRegisterFormEmail">E-mail</label>
                     </div>
 
                     <!-- Password -->
                     <div class="md-form">
-                      <input type="password" id="materialRegisterFormPassword" class="form-control"
-                        aria-describedby="materialRegisterFormPasswordHelpBlock">
+                      <input type="password" name="pass" id="materialRegisterFormPassword" class="form-control"
+                        aria-describedby="materialRegisterFormPasswordHelpBlock" required>
                       <label for="materialRegisterFormPassword">Password</label>
                     </div>
 
                     <div class="md-form">
-                      <input type="text" name="date" id="date" class="form-control datepicker" value="" required />
+                      <input type="text" name="dob" name="date" id="date" class="form-control datepicker" value="" required />
                       <label for="date">Date of Birth</label>
-                      <div class="invalid-feedback">Please select a valid date.</div>
                     </div>
 
                     <!-- Phone number -->
                     <div class="md-form">
-                      <input type="password" id="materialRegisterFormPhone" class="form-control"
+                      <input type="text" name="phno" id="materialRegisterFormPhone" class="form-control"
                         aria-describedby="materialRegisterFormPhoneHelpBlock">
                       <label for="materialRegisterFormPhone">Phone number</label>
                     </div>
 
-                    <!-- Newsletter -->
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-                      <label class="form-check-label" for="materialRegisterFormNewsletter">Subscribe to our
-                        newsletter</label>
-                    </div>
-
                     <!-- Sign up button -->
-                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign up</button>
+                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" name="signup">Sign up</button>
 
                     <hr>
 
