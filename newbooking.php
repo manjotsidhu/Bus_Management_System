@@ -21,20 +21,28 @@ if (isset($_POST['logout'])) {
 }
 
 if (isset($_POST['book'])) {
-  echo "demo";
   require 'db.php';
-  $stid1 = oci_parse($conn, sprintf("SELECT * FROM routes where source = '%s'and destination='%s'", $_POST['source'], $_POST['destination']));
-    oci_execute($stid1);
+  echo $_POST['source'];
+  echo $_POST['destination'];
+  $stid1 = oci_parse($conn, sprintf("SELECT route_id FROM routes WHERE source like '%s'and destination like'%s'", 
+                                                                  $_POST['source'], $_POST['destination']));
+    if(!oci_execute($stid1)){
+      echo " execute";
+    }
+    
     $nroutes = oci_fetch_all($stid1, $row);
     $routes = $row;
-    oci_free_statement($stid1); 
-
+    oci_free_statement($stid1);
+    
   $stid = oci_parse($conn, sprintf("INSERT INTO tickets VALUES (%d, %d, '%s', '%s', %d, '%s', %d)"
   , 1, $user_id, $_POST['name'], $_POST['email'], $routes['ROUTE_ID'][0], $_POST['ticketType'], 1));
   
   if (!oci_execute($stid)) {
     $success = true;
 
+  }
+  else{
+    echo $success;
   }
 
   oci_free_statement($stid);

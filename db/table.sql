@@ -61,7 +61,7 @@ CREATE TABLE tickets
     ( ticket_id    NUMBER(10) PRIMARY KEY
     , user_id    NUMBER(10) REFERENCES users
     , passenger_name     VARCHAR2(35)
-    , passenger_email    VARCHAR(35)
+    , passenger_email    VARCHAR(75)
     , route_id    NUMBER(10) REFERENCES routes
     , type_of_ticket VARCHAR2(15)
     , bus_id  NUMBER(10) REFERENCES buses

@@ -3,33 +3,33 @@ REM ***************************insert data into the BUSES table
 Prompt ******  Populating BUSES table ....
 
 INSERT INTO buses VALUES 
-        ( 10000001 
+        ( 1 
         , 10001
-        , 'MH O1 1999'
-        , 'mahindra'
+        , 'MHO1 AJ 1999'
+        , 'Mahindra'
         , 55
         );
 
 INSERT INTO buses VALUES 
-        ( 10000002 
+        ( 2 
         , 10002
-        , 'KA O3 1587'
-        , 'volvo'
+        , 'KAO3 E 1587'
+        , 'Volvo'
         , 69
         );
 
 INSERT INTO buses VALUES 
-        ( 10000003 
+        ( 3 
         , 10003
-        , 'RJ 27 1589'
-        , 'mercedies'
+        , 'RJ27 FG 1589'
+        , 'Mercedes'
         , 80
         );
 
 INSERT INTO buses VALUES 
-        ( 10000004 
+        ( 4 
         , 10004
-        , 'PB 01 2159'
-        , 'ashoke'
+        , 'TS01 CN 2159'
+        , 'Scania'
         , 50
         );
