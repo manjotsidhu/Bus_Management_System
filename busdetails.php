@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+  header("Location: index.php");
+}
 
+$user_id = $_SESSION['user']['USER_ID'][0];
+$user_fname = $_SESSION['user']['FIRST_NAME'][0];
+$user_lname = $_SESSION['user']['LAST_NAME'][0];
+$user_email = $_SESSION['user']['EMAIL'][0];
+
+if (isset($_POST['logout'])) {
+  session_destroy();
+  header('Location: index.php');
+}
+$drivers = [];
+$ndrivers = 0;
+require 'db.php';
+
+$stid = oci_parse($conn, sprintf("SELECT * FROM drivers natural join buses"));
+    oci_execute($stid);
+    $ndrivers = oci_fetch_all($stid, $row);
+    $drivers = $row;
+    oci_free_statement($stid);
+
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,8 +82,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong>BMS</strong>
+      <a class="navbar-brand" href="dashboard.php">
+        <strong>Bus Management System</strong>
       </a>
 
       <!-- Collapse -->
@@ -73,7 +98,7 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="" target="_blank">Profile</a>
+            <a class="nav-link waves-effect" href="profile.php">Profile</a>
           </li>
         </ul>
 
@@ -165,37 +190,33 @@
                           <!--Table head-->
                           <thead>
                             <tr>
-                              <th>
-                                <input class="form-check-input" type="checkbox" id="checkbox">
-                                <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
-                              </th>
                               <th class="th-lg">
-                                <a>First Name
+                                <a>Driver Name
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Last Name
+                                <a href="">Mobile Number
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
+                                <a href="">Hire Date
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
+                                <a href="">Bus Number
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
+                                <a href="">Company
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
+                                <a href="">Capacity
                                   <i class="fas fa-sort ml-1"></i>
                                 </a>
                               </th>
@@ -205,66 +226,18 @@
 
                           <!--Table body-->
                           <tbody>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox1">
-                                <label class="form-check-label" for="checkbox1" class="label-table"></label>
-                              </th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox2">
-                                <label class="form-check-label" for="checkbox2" class="label-table"></label>
-                              </th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox3">
-                                <label class="form-check-label" for="checkbox3" class="label-table"></label>
-                              </th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox4">
-                                <label class="form-check-label" for="checkbox4" class="label-table"></label>
-                              </th>
-                              <td>Paul</td>
-                              <td>Topolski</td>
-                              <td>@P_Topolski</td>
-                              <td>Paul</td>
-                              <td>Topolski</td>
-                              <td>@P_Topolski</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox5">
-                                <label class="form-check-label" for="checkbox5" class="label-table"></label>
-                              </th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
+                          <?php
+                              for ($i=0; $i < $ndrivers; $i++) { ?>
+                                <tr>
+                                  <td><?php echo $drivers['FIRST_NAME'][$i]." ".$drivers['LAST_NAME'][$i]?></td>
+                                  <td><?php echo $drivers['MOBILE_NUMBER'][$i]?></td>
+                                  <td><?php echo $drivers['HIRE_DATE'][$i]?></td>
+                                  <td><?php echo $drivers['BUS_NO'][$i]?></td>
+                                  <td><?php echo $drivers['COMPANY'][$i]?></td>
+                                  <td><?php echo $drivers['CAPACITY'][$i]?></td>
+                                </tr>
+                            <?php  }
+                            ?>
                           </tbody>
                           <!--Table body-->
                         </table>
@@ -296,7 +269,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2020 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+      <a href="" target="_blank"> BUS MANAGEMENT </a>
     </div>
     <!--/.Copyright-->
 

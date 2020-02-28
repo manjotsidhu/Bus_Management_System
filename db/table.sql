@@ -12,14 +12,16 @@ CREATE TABLE users
 
 CREATE SEQUENCE uid_sequence;
 
+INSERT INTO USERS VALUES (0, 'admin', ' ', 'admin@gmail.com', '9876543210', 'admin', '04-JAN-2000');
+
 CREATE OR REPLACE TRIGGER auto_increment_uid
-  BEFORE INSERT ON users
+BEFORE INSERT ON users
   FOR EACH ROW
-BEGIN
-  SELECT uid_sequence.nextval
+ BEGIN
+ SELECT uid_sequence.nextval
   INTO :new.user_id
   FROM dual;
-END;
+ END;
 
 Prompt ******  Creating DRIVERS table ....
 
@@ -60,7 +62,18 @@ CREATE TABLE tickets
     , user_id    NUMBER(10) REFERENCES users
     , passenger_name     VARCHAR2(20)
     , route_id    NUMBER(10) REFERENCES routes
-    , type_of_ticket VARCHAR2(5)
-    , price  NUMBER(8)
+    , type_of_ticket VARCHAR2(15)
     , bus_id  NUMBER(10) REFERENCES buses
     );
+
+CREATE SEQUENCE tid_sequence;
+INSERT INTO USERS VALUES (0, 0, 'admin ', 102, 'Sleeper', 10000001);
+CREATE OR REPLACE TRIGGER auto_increment_tid
+BEFORE INSERT ON tickets
+  FOR EACH ROW
+ BEGIN
+ SELECT tid_sequence.nextval
+  INTO :new.ticket_id
+  FROM dual;
+ END;
+/   

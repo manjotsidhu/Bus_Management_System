@@ -57,8 +57,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong>BMS</strong>
+      <a class="navbar-brand" href="dashboard.php">
+        <strong>Bus Management System</strong>
       </a>
 
       <!-- Collapse -->
@@ -73,7 +73,7 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="" target="_blank">Profile</a>
+            <a class="nav-link waves-effect" href="">Profile</a>
           </li>
         </ul>
 
@@ -187,7 +187,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2020 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+      <a href="" target="_blank"> BUS MANAGEMENT </a>
     </div>
     <!--/.Copyright-->
 

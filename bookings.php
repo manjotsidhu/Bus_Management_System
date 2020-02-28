@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+  header("Location: index.php");
+}
 
+$user_id = $_SESSION['user']['USER_ID'][0];
+$user_fname = $_SESSION['user']['FIRST_NAME'][0];
+$user_lname = $_SESSION['user']['LAST_NAME'][0];
+$user_email = $_SESSION['user']['EMAIL'][0];
+
+if (isset($_POST['logout'])) {
+  session_destroy();
+  header('Location: index.php');
+}
+$tickets = [];
+$ntickets = 0;
+require 'db.php';
+
+$stid = oci_parse($conn, sprintf("SELECT * FROM tickets natural join routes where tickets.user_id = %d", $user_id));
+    oci_execute($stid);
+    $ntickets = oci_fetch_all($stid, $row);
+    $tickets = $row;
+    oci_free_statement($stid);
+
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,8 +82,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong>BMS</strong>
+      <a class="navbar-brand" href="dashboard.php">
+        <strong>Bus Management System</strong>
       </a>
 
       <!-- Collapse -->
@@ -73,22 +98,25 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="" target="_blank">Profile</a>
+            <a class="nav-link waves-effect" href="profile.php">Profile</a>
           </li>
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+
           <li class="nav-item mr-4">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-user mr-2"></i>Logout
+            <a href="https://github.com/manjotsidhu/Bus_Management_System" class="nav-link border border-light rounded" target="_blank">
+              <i class="fab fa-github mr-2"></i>BMS GitHub
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-github mr-2"></i>BMS GitHub
-            </a>
+          <li class="nav-item ">
+            <form method="post">
+              <button type="submit" class="btn-sm btn-info nav-link border border-light rounded" name="logout">
+                <i class="fas fa-user mr-2"></i><?php echo strtolower($user_fname); ?>, Logout
+              </button>
+            </form>
           </li>
         </ul>
 
@@ -148,7 +176,7 @@
                       <div>
                       </div>
 
-                      <a href="" class="white-text mx-3">Name of User</a>
+                      <a href="" class="white-text mx-3"><?php echo ucwords(strtolower($user_fname." ".$user_lname));?></a>
 
                       <div>
                       </div>
@@ -165,38 +193,34 @@
                           <!--Table head-->
                           <thead>
                             <tr>
-                              <th>
-                                <input class="form-check-input" type="checkbox" id="checkbox">
-                                <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
-                              </th>
                               <th class="th-lg">
-                                <a>First Name
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a>Ticket Id
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Last Name
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a href="">Passenger Name
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a href="">Source
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a href="">Destination
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a href="">Ticket Type
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
-                                <a href="">Username
-                                  <i class="fas fa-sort ml-1"></i>
+                                <a href="">Fare
+                                  
                                 </a>
                               </th>
                             </tr>
@@ -205,66 +229,18 @@
 
                           <!--Table body-->
                           <tbody>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox1">
-                                <label class="form-check-label" for="checkbox1" class="label-table"></label>
-                              </th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox2">
-                                <label class="form-check-label" for="checkbox2" class="label-table"></label>
-                              </th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox3">
-                                <label class="form-check-label" for="checkbox3" class="label-table"></label>
-                              </th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox4">
-                                <label class="form-check-label" for="checkbox4" class="label-table"></label>
-                              </th>
-                              <td>Paul</td>
-                              <td>Topolski</td>
-                              <td>@P_Topolski</td>
-                              <td>Paul</td>
-                              <td>Topolski</td>
-                              <td>@P_Topolski</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <input class="form-check-input" type="checkbox" id="checkbox5">
-                                <label class="form-check-label" for="checkbox5" class="label-table"></label>
-                              </th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
+                            <?php
+                              for ($i=0; $i < $ntickets; $i++) { ?>
+                                <tr>
+                                  <td><?php echo $tickets['TICKET_ID'][$i]?></td>
+                                  <td><?php echo $tickets['PASSENGER_NAME'][$i]?></td>
+                                  <td><?php echo $tickets['SOURCE'][$i]?></td>
+                                  <td><?php echo $tickets['DESTINATION'][$i]?></td>
+                                  <td><?php echo $tickets['TYPE_OF_TICKET'][$i]?></td>
+                                  <td><?php echo $tickets['FARE'][$i]?></td>
+                                </tr>
+                            <?php  }
+                            ?>
                           </tbody>
                           <!--Table body-->
                         </table>

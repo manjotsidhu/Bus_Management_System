@@ -3,8 +3,6 @@
 <?php 
 // Session
 session_start();
-require 'db.php'; 
-$_SESSION["conn"] = $conn; 
 
 $loginError = false;
 $signUpError = false;
@@ -14,6 +12,7 @@ if(isset($_POST['login'])) {
     $user = $_POST['user'];
     $pass = $_POST['pass'];
 
+    require 'db.php';
     $stid = oci_parse($conn, sprintf("SELECT * FROM USERS WHERE EMAIL='%s' AND PASSWORD='%s'", $user, $pass));
     oci_execute($stid);
     oci_fetch_all($stid, $row);
@@ -26,18 +25,22 @@ if(isset($_POST['login'])) {
     } else {
       $loginError = true;
     }
-
+    
     oci_free_statement($stid);
+    oci_close($conn);
+
 
 } else if (isset($_POST['signup'])) {
     
+  require 'db.php';
   $stid = oci_parse($conn, sprintf("INSERT INTO users VALUES (%d, '%s', '%s', '%s', '%s', '%s', '%s')", 0, $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phno'], $_POST['pass'], $_POST['dob']));
   if (!oci_execute($stid)) {
     $signUpError = true;
     $signUpErrorMessage = oci_error($stid);
   }
-  
+
   oci_free_statement($stid);
+  oci_close($conn);
 }
 
 
