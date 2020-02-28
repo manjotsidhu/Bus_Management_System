@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+  header("Location: index.php");
+}
 
+$user_id = $_SESSION['user']['USER_ID'][0];
+$user_fname = $_SESSION['user']['FIRST_NAME'][0];
+$user_lname = $_SESSION['user']['LAST_NAME'][0];
+$user_email = $_SESSION['user']['EMAIL'][0];
+$date_of_birth = $_SESSION['user']['DATE_OF_BIRTH'][0];
+$mobile_number = $_SESSION['user']['MOBILE_NUMBER'][0];
+if (isset($_POST['logout'])) {
+  session_destroy();
+  header('Location: index.php');
+}
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -79,16 +95,19 @@
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+
           <li class="nav-item mr-4">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-user mr-2"></i>Logout
+            <a href="https://github.com/manjotsidhu/Bus_Management_System" class="nav-link border border-light rounded" target="_blank">
+              <i class="fab fa-github mr-2"></i>BMS GitHub
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-github mr-2"></i>BMS GitHub
-            </a>
+          <li class="nav-item ">
+            <form method="post">
+              <button type="submit" class="btn-sm btn-info nav-link border border-light rounded" name="logout">
+                <i class="fas fa-user mr-2"></i><?php echo strtolower($user_fname); ?>, Logout
+              </button>
+            </form>
           </li>
         </ul>
 
@@ -146,19 +165,19 @@
                   
                           <div class="col-md-8 p-5">
                   
-                            <h3 class="font-weight-normal mb-3">Your Name</h3>
+                            <h3 class="font-weight-normal mb-3"><?php echo $user_fname." ".$user_lname ?></h3>
                   
-                            <p class="text-muted">@username.</p>
+                            <p class="text-muted"><?php echo $user_email ?></p>
                   
                             <ul class="list-unstyled font-small mt-5 mb-0">
                               <li>
                                 <p class="text-uppercase mb-2"><strong>Mobile Number</strong></p>
-                                <p class="text-muted mb-4">91+ 9876543210</p>
+                                <p class="text-muted mb-4">91+ <?php echo $mobile_number ?></p>
                               </li>
                   
                               <li>
                                 <p class="text-uppercase mb-2"><strong>Date of Birth</strong></p>
-                                <p class="text-muted mb-4">June 27, 2019</p>
+                                <p class="text-muted mb-4"><?php echo $date_of_birth ?></p>
                               </li>
                             </ul>
                   

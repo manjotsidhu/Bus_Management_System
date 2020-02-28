@@ -204,6 +204,11 @@ $stid = oci_parse($conn, sprintf("SELECT * FROM tickets natural join routes wher
                                 </a>
                               </th>
                               <th class="th-lg">
+                                <a href="">Passenger Email
+                                  
+                                </a>
+                              </th>
+                              <th class="th-lg">
                                 <a href="">Source
                                   
                                 </a>
@@ -234,6 +239,7 @@ $stid = oci_parse($conn, sprintf("SELECT * FROM tickets natural join routes wher
                                 <tr>
                                   <td><?php echo $tickets['TICKET_ID'][$i]?></td>
                                   <td><?php echo $tickets['PASSENGER_NAME'][$i]?></td>
+                                  <td><?php echo $tickets['PASSENGER_EMAIL'][$i]?></td>
                                   <td><?php echo $tickets['SOURCE'][$i]?></td>
                                   <td><?php echo $tickets['DESTINATION'][$i]?></td>
                                   <td><?php echo $tickets['TYPE_OF_TICKET'][$i]?></td>

@@ -104,18 +104,21 @@ $stid = oci_parse($conn, sprintf("SELECT * FROM drivers natural join buses"));
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item mr-4">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-user mr-2"></i>Logout
-            </a>
-          </li>
 
-          <li class="nav-item">
-            <a href="" class="nav-link border border-light rounded" target="_blank">
-              <i class="fab fa-github mr-2"></i>BMS GitHub
-            </a>
-          </li>
-        </ul>
+        <li class="nav-item mr-4">
+          <a href="https://github.com/manjotsidhu/Bus_Management_System" class="nav-link border border-light rounded" target="_blank">
+            <i class="fab fa-github mr-2"></i>BMS GitHub
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <form method="post">
+            <button type="submit" class="btn-sm btn-info nav-link border border-light rounded" name="logout">
+              <i class="fas fa-user mr-2"></i><?php echo strtolower($user_fname); ?>, Logout
+            </button>
+          </form>
+        </li>
+      </ul>
 
       </div>
 
@@ -192,32 +195,32 @@ $stid = oci_parse($conn, sprintf("SELECT * FROM drivers natural join buses"));
                             <tr>
                               <th class="th-lg">
                                 <a>Driver Name
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
                                 <a href="">Mobile Number
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
                                 <a href="">Hire Date
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
                                 <a href="">Bus Number
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
                                 <a href="">Company
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                               <th class="th-lg">
                                 <a href="">Capacity
-                                  <i class="fas fa-sort ml-1"></i>
+                                  
                                 </a>
                               </th>
                             </tr>

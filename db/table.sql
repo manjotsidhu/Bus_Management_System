@@ -60,14 +60,15 @@ Prompt ******  Creating TICKETS table ....
 CREATE TABLE tickets
     ( ticket_id    NUMBER(10) PRIMARY KEY
     , user_id    NUMBER(10) REFERENCES users
-    , passenger_name     VARCHAR2(20)
+    , passenger_name     VARCHAR2(35)
+    , passenger_email    VARCHAR(35)
     , route_id    NUMBER(10) REFERENCES routes
     , type_of_ticket VARCHAR2(15)
     , bus_id  NUMBER(10) REFERENCES buses
     );
 
 CREATE SEQUENCE tid_sequence;
-INSERT INTO USERS VALUES (0, 0, 'admin ', 102, 'Sleeper', 10000001);
+INSERT INTO tickets VALUES (0, 0, 'admin ','admin@gmail.com', 102, 'Sleeper', 10000001);
 CREATE OR REPLACE TRIGGER auto_increment_tid
 BEFORE INSERT ON tickets
   FOR EACH ROW
