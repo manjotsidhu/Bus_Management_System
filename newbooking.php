@@ -35,8 +35,8 @@ if (isset($_POST['book'])) {
   
   if (oci_execute($stid)) {
     echo $success;
-    $success = true;
     $fare = $row['FARE'][0];
+    $success = true;
   }
 
   oci_free_statement($stid);
@@ -256,7 +256,7 @@ if (isset($_POST['book'])) {
               </select>           
 
               <div class="text-center">
-                <button type="submit" class="btn btn-lg btn-block btn-default btn-rounded waves-effect">Book Now !</button>
+                <button type="submit" name="book" class="btn btn-lg btn-block btn-default btn-rounded waves-effect">Book Now !</button>
               </div>
 
             </form>
@@ -305,7 +305,7 @@ if (isset($_POST['book'])) {
     new WOW().init();
     
   </script>
-  <?php if($success) { echo "in"; echo '<script type="text/javascript">$("#confirmModal").modal("show");</script>'; }?>
+  <?php if($success) { echo '<script type="text/javascript">$("#confirmModal").modal("show");</script>'; }?>
 </body>
 
 </html>
