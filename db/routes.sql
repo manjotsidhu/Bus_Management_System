@@ -4,85 +4,85 @@ Prompt ******  Populating ROUTES table ....
 
 INSERT INTO routes VALUES 
         ( 101
-        , 'mumbai'
-        , 'bangaluru'
+        , 'Mumbai'
+        , 'Bengaluru'
         , 2000 
         );
 
 INSERT INTO routes VALUES 
         ( 102
-        , 'mumbai'
-        , 'nagpur'
+        , 'Mumbai'
+        , 'Nagpur'
         , 1500 
         );
 
 INSERT INTO routes VALUES 
         ( 103
-        , 'mumbai'
-        , 'delhi'
+        , 'Mumbai'
+        , 'Hyderabad'
         , 1300 
         );
 
 INSERT INTO routes VALUES 
         ( 104
-        , 'bangaluru'
-        , 'nagpur'
+        , 'Bengaluru'
+        , 'Nagpur'
         , 1700 
         );
 
 INSERT INTO routes VALUES 
         ( 105
-        , 'bangaluru'
-        , 'delhi'
+        , 'Bengaluru'
+        , 'Hyderabad'
         , 800 
         );
 
 
 INSERT INTO routes VALUES 
         ( 106
-        , 'nagpur'
-        , 'delhi'
+        , 'Nagpur'
+        , 'Hyderabad'
         , 900 
         );
 
 INSERT INTO routes VALUES 
         ( 107
-        , 'delhi'
-        , 'nagpur'
+        , 'Hyderabad'
+        , 'Nagpur'
         , 900 
         );
 
 INSERT INTO routes VALUES 
         ( 108
-        , 'delhi'
-        , 'bangaluru'
+        , 'Hyderabad'
+        , 'Bengaluru'
         , 800 
         );
 
 INSERT INTO routes VALUES 
         ( 109
-        , 'nagpur'
-        , 'bangaluru'
+        , 'Nagpur'
+        , 'Bengaluru'
         , 1700 
         );
 
 INSERT INTO routes VALUES 
         ( 112
-        , 'delhi'
-        , 'mumbai'
+        , 'Hyderabad'
+        , 'Mumbai'
         , 1300 
         );
 
 INSERT INTO routes VALUES 
         ( 110
-        , 'nagpur'
-        , 'mumbai'
+        , 'Nagpur'
+        , 'Mumbai'
         , 1500 
         );
 
 INSERT INTO routes VALUES 
         ( 111
-        , 'bangaluru'
-        , 'mumbai'
+        , 'Bengaluru'
+        , 'Mumbai'
         , 2000 
         );
