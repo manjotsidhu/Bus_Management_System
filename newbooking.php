@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 $success = false;
 $routes = [];
+$fare = 0;
 
 $user_id = $_SESSION['user']['USER_ID'][0];
 $user_fname = $_SESSION['user']['FIRST_NAME'][0];
@@ -32,12 +33,10 @@ if (isset($_POST['book'])) {
   $stid = oci_parse($conn, sprintf("INSERT INTO tickets VALUES (%d, %d, '%s', '%s', %d, '%s', %d)"
   , 1, $user_id, $_POST['name'], $_POST['email'], $routes['ROUTE_ID'][0], $_POST['ticketType'], 1));
   
-  if (!oci_execute($stid)) {
-    $success = true;
-
-  }
-  else{
+  if (oci_execute($stid)) {
     echo $success;
+    $success = true;
+    $fare = $row['FARE'][0];
   }
 
   oci_free_statement($stid);
@@ -97,14 +96,14 @@ if (isset($_POST['book'])) {
 <body>
 
 <!-- Central Modal Medium Success -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal"
+<div class="modal fade show" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal"
   aria-hidden="true">
   <div class="modal-dialog modal-notify modal-success" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header">
-        <p class="heading lead">Ticket Confirmation</p>
+        <p class="heading lead">Ticket Booked Successfully</p>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="white-text">&times;</span>
@@ -115,14 +114,14 @@ if (isset($_POST['book'])) {
       <div class="modal-body">
         <div class="text-center">
           <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
-          <p>Total ticket .</p>
+          <p>Total ticket fare is <b>Rs.<?php echo $fare; ?></b>.<br>Thanks for booking tickets with us!</p>
         </div>
       </div>
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-success">Get it now <i class="far fa-gem ml-1 text-white"></i></a>
-        <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">No, thanks</a>
+        <a type="button" class="btn btn-success" href="bookings.php">Booking Details <i class="fa fa-user ml-1 text-white"></i></a>
+        <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal" href="dashboard.php">Dashboard</a>
       </div>
     </div>
     <!--/.Content-->
@@ -131,7 +130,7 @@ if (isset($_POST['book'])) {
 <!-- Central Modal Medium Success-->
 
   <!-- Navbar -->
-  <nav class="navbar  navbar-expand-lg navbar-light white scrolling-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
 
       <!-- Brand -->
@@ -212,7 +211,7 @@ if (isset($_POST['book'])) {
 
 
     <div class="row">
-      <div class="col-md-6 mx-auto">
+      <div class="col-md-5 mx-auto">
         <!-- Material form login -->
         <div class="card">
 
@@ -296,7 +295,9 @@ if (isset($_POST['book'])) {
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
+    
   </script>
+  <?php if($success) { echo "in"; echo '<script type="text/javascript">$("#confirmModal").modal("show");</script>'; }?>
 </body>
 
 </html>
