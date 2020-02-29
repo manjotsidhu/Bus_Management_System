@@ -157,7 +157,7 @@ if (isset($_POST['logout'])) {
           <div class="col-lg-4 col-md-12 mb-4">
 
             <div class="overlay rounded z-depth-1">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/58.jpg" class="img-fluid" alt="Sample project image">
+              <img src="img/1.jpg" class="img-fluid" alt="Ticket Booking">
               <a>
                 <div class="mask rgba-white-slight"></div>
               </a>
@@ -176,7 +176,7 @@ if (isset($_POST['logout'])) {
           <div class="col-lg-4 col-md-6 mb-4">
 
             <div class="overlay rounded z-depth-1">
-              <img src="https://mdbootstrap.com/img/Photos/Others/project4.jpg" class="img-fluid" alt="Sample project image">
+              <img src="img/2.png" class="img-fluid" alt="Booking Details">
               <a>
                 <div class="mask rgba-white-slight"></div>
               </a>
@@ -195,7 +195,7 @@ if (isset($_POST['logout'])) {
           <div class="col-lg-4 col-md-6 mb-4">
 
             <div class="overlay rounded z-depth-1">
-              <img src="https://mdbootstrap.com/img/Photos/Others/images/88.jpg" class="img-fluid" alt="Sample project image">
+              <img src="img/3.jpg" class="img-fluid" alt="Bus Details">
               <a>
                 <div class="mask rgba-white-slight"></div>
               </a>
