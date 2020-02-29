@@ -223,9 +223,15 @@ if (isset($_POST['book'])) {
 
               <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Book Your Tickets Now</h3>
 
-              <input type="name" name="name" class="form-control mb-4" placeholder="Name">
-              <!-- Name -->
-              <input name="email" class="form-control mb-4" placeholder="Email">
+              <div class="md-form">
+                <input type="text" id="name" name="name" class="form-control mb-4">
+                <label for="name">Name</label>
+              </div>
+              
+              <div class="md-form">
+                <input type="email" name="email" id="email" class="form-control mb-4">
+                <label for="email">Email</label>
+              </div>
 
               <select name="ticketType" class="browser-default custom-select mb-4">
                 <option value="" disabled selected>Choose your ticket type</option>
@@ -233,6 +239,7 @@ if (isset($_POST['book'])) {
                 <option value="Semi-Sleeper">Semi-Sleeper</option>
                 <option value="Seater">Seater</option>
               </select>
+
               <select name="source" class="browser-default custom-select mb-4">
                 <option value="" disabled selected>Source Location</option>
                 <option value="Bengaluru">Bengaluru</option>
@@ -246,9 +253,10 @@ if (isset($_POST['book'])) {
                 <option value="Hyderabad">Hyderabad</option>
                 <option value="Nagpur">Nagpur</option>
                 <option value="Mumbai">Mumbai</option>
-              </select>              
+              </select>           
+
               <div class="text-center">
-                <button type="submit" class="btn btn-outline-orange btn-rounded my-4 waves-effect" name="book">Book</button>
+                <button type="submit" class="btn btn-lg btn-block btn-default btn-rounded waves-effect">Book Now !</button>
               </div>
 
             </form>
