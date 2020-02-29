@@ -17,6 +17,7 @@ if (isset($_POST['logout'])) {
   header('Location: index.php');
 }
 ?>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -78,8 +79,7 @@ if (isset($_POST['logout'])) {
       </a>
 
       <!-- Collapse -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -150,45 +150,41 @@ if (isset($_POST['logout'])) {
         <form class="container" action="">
 
           <div class="row">
-            <div class="mx-auto">
-              <!-- Material form login -->
-              <div class="card text-center">
+            <div class="mx-auto col-md-5">
+              <!--Card-->
+              <div class="card card-cascade">
 
-                <!--Card content-->
-                <div class="card-body">
-                        
-                        <div class="row">
-                  
-                          <div class="col-md-4 text-center" >
-                            <img class="img rounded-left mx-2" src="img/user.png" alt="project image">
-                          </div>
-                  
-                          <div class="col-md-8 p-5">
-                  
-                            <h3 class="font-weight-normal mb-3"><?php echo $user_fname." ".$user_lname ?></h3>
-                  
-                            <p class="text-muted"><?php echo $user_email ?></p>
-                  
-                            <ul class="list-unstyled font-small mt-5 mb-0">
-                              <li>
-                                <p class="text-uppercase mb-2"><strong>Mobile Number</strong></p>
-                                <p class="text-muted mb-4">91+ <?php echo $mobile_number ?></p>
-                              </li>
-                  
-                              <li>
-                                <p class="text-uppercase mb-2"><strong>Date of Birth</strong></p>
-                                <p class="text-muted mb-4"><?php echo $date_of_birth ?></p>
-                              </li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
+                <!--Card image-->
+                <div class="mt-2 text-center">
+                  <img src="img/user.png" class="img-fluid" alt="">
                   
                 </div>
+                <!--/.Card image-->
+
+                <!--Card content-->
+                <div class="card-body card-body-cascade text-center">
+                  <!--Title-->
+                  <h4 class="card-title"><strong><?php echo $user_fname . " " . $user_lname ?></strong></h4>
+                  <h5><?php echo $user_email ?></h5>
+
+                  <ul class="list-unstyled font-small mt-5 mb-0">
+                        <li>
+                          <p class="text-uppercase mb-2"><strong>Mobile Number</strong></p>
+                          <p class="text-muted mb-4">91+ <?php echo $mobile_number ?></p>
+                        </li>
+
+                        <li>
+                          <p class="text-uppercase mb-2"><strong>Date of Birth</strong></p>
+                          <p class="text-muted mb-4"><?php echo $date_of_birth ?></p>
+                        </li>
+                      </ul>
+
+                </div>
+                <!--/.Card content-->
 
               </div>
-              <!-- Material form login -->
+              <!--/.Card-->
+              
             </div>
           </div>
 
